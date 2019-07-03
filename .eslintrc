@@ -1,0 +1,12 @@
+{
+  "extends": "rallycoding",
+  "rules": {
+    "no-case-declarations": "off",
+    "guard-for-in": "off",
+    "no-restricted-syntax": "off",
+    "no-confusing-arrow": "off",
+    "arrow-body-style": "off",
+    "no-param-reassign": "off",
+    "dot-notation": "off"
+  }
+}
