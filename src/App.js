@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { Provider } from 'react-redux';
 
+import store from './store';
 import Signin from './containers/Signin';
 
 export default class App extends Component {
@@ -8,9 +10,11 @@ export default class App extends Component {
     const { container } = styles;
 
     return (
-      <View style={container}>
-        <Signin />
-      </View>
+      <Provider store={store}>
+        <View style={container}>
+          <Signin />
+        </View>
+      </Provider>
     );
   }
 }

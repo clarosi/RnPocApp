@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 
-import { MainView, Heading, Textbox, Button } from '../../components/Common';
+import {
+  MainView,
+  Heading,
+  Textbox,
+  Button,
+  Spinner
+} from '../../components/Common';
 import { getNewControls } from '../../shared/utils';
+import { doLogin } from '../../store/actions';
 
 class Signin extends Component {
   state = {
@@ -32,8 +40,11 @@ class Signin extends Component {
     }
   };
 
+  componentDidMount = () => {};
+
   onPressHandler = () => {
-    console.log('onPress');
+    const { email, password } = this.state.controls;
+    this.props.doLogin({ email: email.value, password: password.value });
   };
 
   onChangeTextHandler = (id, value) => {
@@ -42,13 +53,24 @@ class Signin extends Component {
     newControls = getNewControls({ id, value, newControls });
 
     const { email, password } = newControls;
-    const disabled =
-      (!email.valid && email.touch) || (!password.valid && password.touch);
+    const disabled = !email.valid || !password.valid;
     this.setState({ controls: newControls, disabled });
   };
 
-  render() {
+  renderButton = () => {
     const { disabled } = this.state;
+    const { loading } = this.props;
+
+    if (loading) return <Spinner />;
+
+    return (
+      <Button disabled={disabled} onPress={this.onPressHandler}>
+        SignIn
+      </Button>
+    );
+  };
+
+  render() {
     const { email, password } = this.state.controls;
     const { container, controlWrapper, buttonWrapper } = styles;
 
@@ -72,11 +94,7 @@ class Signin extends Component {
                 this.onChangeTextHandler('password', value)
               }
             />
-            <View style={buttonWrapper}>
-              <Button disabled={disabled} onPress={this.onPressHandler}>
-                SignIn
-              </Button>
-            </View>
+            <View style={buttonWrapper}>{this.renderButton()}</View>
           </View>
         </View>
       </MainView>
@@ -93,4 +111,12 @@ const styles = StyleSheet.create({
   buttonWrapper: { alignItems: 'center' }
 });
 
-export default Signin;
+const mapStateToProps = state => {
+  const { loading } = state.auth;
+  return { loading };
+};
+
+export default connect(
+  mapStateToProps,
+  { doLogin }
+)(Signin);

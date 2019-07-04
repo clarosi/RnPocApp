@@ -7,6 +7,8 @@
     "no-confusing-arrow": "off",
     "arrow-body-style": "off",
     "no-param-reassign": "off",
-    "dot-notation": "off"
+    "dot-notation": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": "off"
   }
 }

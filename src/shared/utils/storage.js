@@ -1,9 +1,9 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { TOKEN_NAME } from '../strings';
 
 export const storage = async ({ type, key = TOKEN_NAME, value }) => {
-  let result = null;
+  let result = '';
 
   switch (type) {
     case 'GET':
@@ -20,8 +20,6 @@ export const storage = async ({ type, key = TOKEN_NAME, value }) => {
       break;
   }
 
-  if (result !== null) return result;
-
-  result = '';
   return result;
+  //if (result !== null) return result;
 };

@@ -4,10 +4,9 @@ import { storage } from './index';
 import { TOKEN_NAME } from '../strings';
 
 const axiosInstance = axios.create({
-  baseURL:
-    process.env.NODE_ENV === 'production'
-      ? 'https://aqueous-mountain-63457.herokuapp.com/'
-      : 'http://localhost:4000/',
+  baseURL: __DEV__
+    ? 'http://10.241.112.110:4000/'
+    : 'https://aqueous-mountain-63457.herokuapp.com/',
   timeout: 9000
 });
 
