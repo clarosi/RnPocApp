@@ -5,7 +5,7 @@ import { TOKEN_NAME } from '../strings';
 
 const axiosInstance = axios.create({
   baseURL: __DEV__
-    ? 'http://10.241.112.110:4000/'
+    ? 'http://192.168.99.1:4000/'
     : 'https://aqueous-mountain-63457.herokuapp.com/',
   timeout: 9000
 });

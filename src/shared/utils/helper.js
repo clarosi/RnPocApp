@@ -14,13 +14,20 @@ export const dispatchAction = async ({ dispatch, url, data, method, type }) => {
   if (result.error) {
     if (result.error.response) {
       const { data, status, statusText } = result.error.response;
-      const newResult = { ...result, status, statusText, errorRes: data.error };
+      const newResult = {
+        ...result,
+        status,
+        statusText,
+        errorRes: data.error
+      };
       result = newResult;
     }
-    return dispatch({ type: SET_ERROR, payload: result });
+    dispatch({ type: SET_ERROR, payload: result });
+    return;
   }
+
   if (method === 'PUT') result = data;
-  return dispatch({ type, payload: result });
+  dispatch({ type, payload: result });
 };
 
 export const getNewControls = ({ id, value, newControls }) => {

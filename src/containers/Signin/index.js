@@ -7,7 +7,8 @@ import {
   Heading,
   Textbox,
   Button,
-  Spinner
+  Spinner,
+  Icons
 } from '../../components/Common';
 import { getNewControls } from '../../shared/utils';
 import { doLogin } from '../../store/actions';
@@ -72,28 +73,34 @@ class Signin extends Component {
 
   render() {
     const { email, password } = this.state.controls;
-    const { container, controlWrapper, buttonWrapper } = styles;
+    const { container, controlWrapper, buttonWrapper, inputWrapper } = styles;
 
     return (
       <MainView>
         <View style={container}>
           <View style={controlWrapper}>
             <Heading>SignIn</Heading>
-            <Textbox
-              value={email.value}
-              control={email}
-              placeholder="Email"
-              onChangeText={value => this.onChangeTextHandler('email', value)}
-            />
-            <Textbox
-              value={password.value}
-              control={password}
-              secureTextEntry
-              placeholder="Password"
-              onChangeText={value =>
-                this.onChangeTextHandler('password', value)
-              }
-            />
+            <View style={inputWrapper}>
+              <Icons name="user" />
+              <Textbox
+                value={email.value}
+                control={email}
+                placeholder="Email"
+                onChangeText={value => this.onChangeTextHandler('email', value)}
+              />
+            </View>
+            <View style={inputWrapper}>
+              <Icons name="key" />
+              <Textbox
+                value={password.value}
+                control={password}
+                secureTextEntry
+                placeholder="Password"
+                onChangeText={value =>
+                  this.onChangeTextHandler('password', value)
+                }
+              />
+            </View>
             <View style={buttonWrapper}>{this.renderButton()}</View>
           </View>
         </View>
@@ -108,6 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   controlWrapper: { width: '80%' },
+  inputWrapper: { flexDirection: 'row', width: '100%' },
   buttonWrapper: { alignItems: 'center' }
 });
 
